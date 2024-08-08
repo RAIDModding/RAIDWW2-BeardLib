@@ -85,8 +85,9 @@
                     <post hook_id="lib/managers/menumanager"/>
                 </group>
                 <post hook_id="lib/network/matchmaking/networkmatchmakingsteam" :script_path="NetworkMatchmakingSteam.lua"/>
-                <post hook_id="core/lib/utils/dev/editor/coreworlddefinition" :script_path="CoreWorldDefinition.lua"/>
             </group>
+            <post hook_id="lib/tweak_data/groupaitweakdata" :script_path="Maps/Hooks.lua"/>
+            <post hook_id="core/lib/utils/dev/editor/coreworlddefinition" :script_path="Maps/CoreWorldDefinition.lua"/>
 
             <group :script_path="Music/" game="pd2">
                 <group :script_path="Hooks.lua">

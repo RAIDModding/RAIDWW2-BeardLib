@@ -165,12 +165,13 @@ function MenuHelperPlus:AddDivider(params)
 end
 
 function MenuHelperPlus:AddToggle(params)
+	BeardLib:log("q")
 	local node = params.node or self:GetNode(params.menu, params.node_name)
 	if not node then
         (params.mod or BeardLib):Err("Unable to find node " .. params.node_name)
         return
     end
-
+	BeardLib:log("g")
 	local data = {
 		type = "CoreMenuItemToggle.ItemToggle",
 		{
