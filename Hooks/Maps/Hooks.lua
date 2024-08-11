@@ -284,8 +284,6 @@ elseif F == "groupaitweakdata" then
         if not Global.game_settings or not Global.game_settings.level_id or not tweak_data.levels[Global.game_settings.level_id] then
             return
         end
-		BeardLib:log(tostring("COCK"))
-		BeardLib:log(tostring(Global.game_settings.level_id))
         return _read_mission_preset(self, tweak_data, ...)
     end
 ----------------------------------------------------------------
