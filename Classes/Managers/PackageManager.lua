@@ -133,22 +133,23 @@ BeardLibPackageManager.EXT_CONVERT = {dds = "texture", png = "texture", tga = "t
 
 local CP_DEFAULT = BeardLib:GetPath() .. "Assets/units/default_cp.cooked_physics"
 function BeardLibPackageManager:LoadConfig(directory, config, mod, settings)
+    BeardLib:DevLog("BeardLibPackageManager " .. "LoadConfig")
     if not (SystemFS and SystemFS.exists) then
         self:Err("SystemFS does not exist! Custom packages cannot function without this! Do you have an outdated game version?")
         return
 	end
-
+    BeardLib:DevLog("BeardLibPackageManager " .. "Passed SYSFS")
 	if not DB.create_entry then
 		self:Err("Create entry function does not exist, cannot add files.")
 		return
 	end
-
+    BeardLib:DevLog("BeardLibPackageManager " .. "Passed DB")
     local skip_use_clbk, temp = false, false
     if type(settings) == "table" then
         skip_use_clbk = settings.skip_use_clbk
         temp = settings.temp
     end
-
+    BeardLib:DevLog("BeardLibPackageManager " .. "Passed Settings")
     if not skip_use_clbk then
         local use_clbk = config.use_clbk or config.load_clbk
         if use_clbk and mod then
@@ -158,12 +159,12 @@ function BeardLibPackageManager:LoadConfig(directory, config, mod, settings)
             return
         end
     end
-
+    BeardLib:DevLog("BeardLibPackageManager " .. "passed clbk")
     local ingame = Global.level_data and Global.level_data.level_id ~= nil
     local inmenu = not ingame
 
     local game = BeardLib:GetGame() or "pd2"
-
+    BeardLib:DevLog("BeardLibPackageManager " .. "prefor")
     local loading = {}
     for _, child in ipairs(config) do
         if type(child) == "table" then
@@ -177,11 +178,13 @@ function BeardLibPackageManager:LoadConfig(directory, config, mod, settings)
             end
 
             local c_game = child.game or config.game
-
+            BeardLib:DevLog("BeardLibPackageManager " .. "idk")
             if (not c_game or c_game == game) and (not use_clbk or use_clbk(path, typ)) then
                 if typ == UNIT_LOAD or typ == ADD then
+                    BeardLib:DevLog("BeardLibPackageManager " .. "LoadConfig2")
                     self:LoadConfig(child.directory and Path:Combine(directory, child.directory) or directory, child, mod, {skip_use_clbk = true, temp = temp})
                 elseif BeardLibPackageManager.UNIT_SHORTCUTS[typ] then
+                    BeardLib:DevLog("BeardLibPackageManager " .. "UNIT_SHORTCUTS")
                     local ids_path = Idstring(path)
                     local file_path = child.full_path or Path:Combine(directory, child.file_path or path)
                     local auto_cp = NotNil(child.auto_cp, config.auto_cp, true)
@@ -189,10 +192,11 @@ function BeardLibPackageManager:LoadConfig(directory, config, mod, settings)
                     if auto_cp then
                         self:AddFileWithCheck(COOKED_PHYSICS_IDS, ids_path, CP_DEFAULT)
                     end
-
+                    BeardLib:DevLog("BeardLibPackageManager " .. "UNIT_IDS")
                     self:AddFileWithCheck(MODEL_IDS, ids_path, file_path.."."..MODEL)
+                    BeardLib:DevLog("BeardLibPackageManager " .. "MODEL_IDS")
                     self:AddFileWithCheck(OBJECT_IDS, ids_path, file_path.."."..OBJECT)
-
+                    BeardLib:DevLog("BeardLibPackageManager " .. "OBJECT_IDS")
                     for load_type, load in pairs(BeardLibPackageManager.UNIT_SHORTCUTS[typ]) do
                         local type_ids = load_type:id()
                         if load_type ~= TEXTURE then
@@ -205,12 +209,14 @@ function BeardLibPackageManager:LoadConfig(directory, config, mod, settings)
                         end
                     end
                 elseif BeardLibPackageManager.TEXTURE_SHORTCUTS[typ] then
+                    BeardLib:DevLog("BeardLibPackageManager " .. "texture")
                     path = Path:Normalize(path)
                     local file_path = child.full_path or Path:Combine(directory, config.file_path or path)
                     for _, suffix in pairs(BeardLibPackageManager.TEXTURE_SHORTCUTS[typ]) do
                         Managers.File:AddFileWithCheck(TEXTURE_IDS, Idstring(path..suffix), file_path..suffix.."."..TEXTURE)
                     end
                 elseif typ and path then
+                    BeardLib:DevLog("BeardLibPackageManager " .. "typpath")
                     path = Path:Normalize(path)
                     local ids_ext = Idstring(BeardLibPackageManager.EXT_CONVERT[typ] or typ)
                     local inner_directory = config.inner_directory
@@ -226,8 +232,9 @@ function BeardLibPackageManager:LoadConfig(directory, config, mod, settings)
                     local dyn_load_game = NotNil(child.load_in_game, config.load_in_game, false)
                     local dyn_load_menu = NotNil(child.load_in_menu, config.load_in_menu, false)
                     local dyn_load = NotNil(child.load, config.load, false)
-
-                    if (from_db and blt.asset_db.has_file(path, typ)) or (not from_db and FileIO:Exists(file_path_ext)) then
+                    BeardLib:DevLog("BeardLibPackageManager " .. "asset_db")
+                    if (not from_db and FileIO:Exists(file_path_ext)) then --(from_db and blt.asset_db.has_file(path, typ)) or
+                        BeardLib:DevLog("BeardLibPackageManager " .. "asset_db2")
                         local load = force
                         if not load then
                             local force_if_not_loaded = NotNil(child.force_if_not_loaded, config.force_if_not_loaded, false)
@@ -275,6 +282,7 @@ function BeardLibPackageManager:LoadConfig(directory, config, mod, settings)
                     self:Err("Node in %s does not contain a definition for both type and path", tostring(directory))
                 end
             end
+            BeardLib:DevLog("BeardLibPackageManager " .. "postfor")
         end
     end
 
