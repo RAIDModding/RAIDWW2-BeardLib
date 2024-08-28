@@ -99,7 +99,6 @@ function DependenciesModule:AddDepDownload(dep)
     --Default install directories for different mod types.
     local install_directory = {
         blt = "./mods/",
-        mod_overrides = "./assets/mod_overrides/",
         map = "./maps/"
     }
 

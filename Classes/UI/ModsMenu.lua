@@ -208,10 +208,12 @@ function BeardLibModsMenu:AddMod(mod, framework)
         text("Disabled", "["..managers.localization:text("beardlib_mod_disabled").."]")
     end
 
-    if loc._custom_localizations[txt] then
-		text("Type", "["..loc:text("beardlib_mod_type_" .. type).."]")
-	else
-		text("Type", "["..cap(type).."]")
+    if type ~= BaseFramework.type_name then
+        if loc._custom_localizations[txt] then
+            text("Type", "["..loc:text("beardlib_mod_type_" .. type).."]")
+        else
+            text("Type", "["..cap(type).."]")
+        end
     end
 
     text("Title", tostring(name))

@@ -34,12 +34,6 @@ function FrameworkBase:init()
 	self._overridden_files = {}
 	self._log_init = BeardLib.Options:GetValue("LogInit")
 
-	-- Deprecated, try not to use.
-	if AddFramework and self.type_name == AddFramework.type_name then
-		BeardLib.Frameworks.base = self
-		BeardLib.managers.BaseFramework = self
-	end
-
 	Hooks:Add("BeardLibRequireHook", self.type_name.."_framework_require", function(post, file)
 		self:CheckModQueue(post, file)
 	end)
@@ -180,7 +174,7 @@ function FrameworkBase:FindOverrides(mod_path, path, check_all)
 			local ext = Path:GetFileExtension(file_path):id()
 
 			-- Avoid loading things that are already handled by the game
-			if self.type_name ~= AddFramework.type_name then
+			if self.type_name ~= FrameworkBase.type_name then
 				local file_id =  Path:Combine(path, Path:GetFileNameNoExt(file)):id()
 				local ext_id = ext:id()
 
@@ -359,18 +353,4 @@ function MapFramework:GetMapByJobId(job_id)
         end
     end
     return nil
-end
-
-AddFramework = AddFramework or BeardLib:Class(FrameworkBase)
-AddFramework.type_name = "Add"
-AddFramework._directory = BeardLib.config.mod_override_dir
-
-function AddFramework:init()
-    -- Deprecated, try not to use.
-    if self.type_name == AddFramework.type_name then
-        BeardLib.Frameworks.add = self
-        BeardLib.managers.AddFramework = self
-    end
-
-    AddFramework.super.init(self)
 end

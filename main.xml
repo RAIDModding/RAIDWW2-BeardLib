@@ -9,7 +9,6 @@
 	image="guis/textures/beardlib_logo"
 	color="Color(0.8,0.8,0.8)"
 	auto_image_color="true"
-	mod_override_dir="assets/mod_overrides/"
 	version="5.0.1">
 	<load_modules>
 		<AddFiles directory="Assets">
