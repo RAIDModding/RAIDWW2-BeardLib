@@ -189,7 +189,8 @@ function BeardLibModsMenu:AddMod(mod, framework)
             alone_in_row = true,
 			auto_foreground = auto_color,
             count_as_aligned = true,
-            texture = img or "guis/textures/pd2/none_icon",
+            texture = img or "ui/atlas/menu/raid_atlas_menu",
+            texture_rect = img and nil or { 353, 894, 100, 100 },
             position = "CenterTop"
         })
     end

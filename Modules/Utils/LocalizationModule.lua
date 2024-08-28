@@ -43,7 +43,7 @@ function LocalizationModule:LoadGroup(data, directory, language)
 end
 
 function LocalizationModule:LoadLocalization()
-    local lang_key = (LocalizationModule.forced_language or SystemInfo:language()):key()
+    local lang_key = (LocalizationModule.forced_language or Idstring(Steam:current_language())):key()
     local latam = string.key("latam")
     -- Fallback to Spanish if there is no specific localization for Latin American Spanish
     if lang_key == latam and not self.Localizations[latam] then
