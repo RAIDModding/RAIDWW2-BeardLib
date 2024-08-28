@@ -209,7 +209,7 @@ function BeardLibModsMenu:AddMod(mod, framework)
         text("Disabled", "["..managers.localization:text("beardlib_mod_disabled").."]")
     end
 
-    if type ~= BaseFramework.type_name then
+    if type ~= FrameworkBase.type_name then
         if loc._custom_localizations[txt] then
             text("Type", "["..loc:text("beardlib_mod_type_" .. type).."]")
         else
@@ -431,13 +431,13 @@ function BeardLibModsMenu:OpenSettings()
                 value = BeardLib.Options:GetValue("DevMode"),
                 on_callback = ClassClbk(self, "SetOption")
             })
-            holder:Toggle({
-                name = "GithubUpdates",
-                text = "beardlib_github_updates",
-                help = "beardlib_github_updates_help",
-                value = BeardLib.Options:GetValue("GithubUpdates"),
-                on_callback = ClassClbk(self, "SetOption")
-            })
+            -- holder:Toggle({
+            --     name = "GithubUpdates",
+            --     text = "beardlib_github_updates",
+            --     help = "beardlib_github_updates_help",
+            --     value = BeardLib.Options:GetValue("GithubUpdates"),
+            --     on_callback = ClassClbk(self, "SetOption")
+            -- })
             holder:Toggle({
                 name = "LogSounds",
                 text = "beardlib_log_sounds",
