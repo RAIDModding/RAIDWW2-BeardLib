@@ -131,7 +131,8 @@ end
 
 function BeardLibAchievementMenu:InitAccount()
 	local panel = self._account_progression
-	local steam_avatar = panel:Image({texture = "guis/texture/pd2/none_icon", img_color = Color.white, w = 64, h = 64})
+	local fallback_avatar = {texture = "ui/atlas/menu/raid_atlas_menu", texture_rect = { 353, 894, 100, 100 }, img_color = Color.white, w = 64, h = 64}
+	local steam_avatar = panel:Image(fallback_avatar)
 	local stats = panel:Grid({
 		name = "Stats",
 		inherit_values = {offset = {0, 3}},
@@ -141,15 +142,13 @@ function BeardLibAchievementMenu:InitAccount()
 
 	if Steam and Steam.friend_avatar then
 		Steam:friend_avatar(2, Steam:userid(), function (texture)
-			local avatar = texture or "guis/textures/pd2/none_icon"
-			steam_avatar:SetImage(avatar)
+			steam_avatar:SetImage(texture or fallback_avatar.texture, texture and {} or fallback_avatar.texture_rect)
 		end)
 
 		BeardLib:AddDelayedCall("BeardLib_Recheck_Account_Avatar", 2, function()
 			Steam:friend_avatar(2, Steam:userid(), function (texture)
-				local avatar = texture or "guis/textures/pd2/none_icon"
 				if alive(steam_avatar) then
-					steam_avatar:SetImage(avatar)
+					steam_avatar:SetImage(texture or fallback_avatar.texture, texture and {} or fallback_avatar.texture_rect)
 				end
 			end)
 		end)
