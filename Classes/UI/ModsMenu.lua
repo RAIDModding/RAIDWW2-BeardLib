@@ -190,7 +190,7 @@ function BeardLibModsMenu:AddMod(mod, framework)
 			auto_foreground = auto_color,
             count_as_aligned = true,
             texture = img or "ui/atlas/menu/raid_atlas_menu",
-            texture_rect = img and nil or { 353, 894, 100, 100 },
+            texture_rect = not img and { 353, 894, 100, 100 },
             position = "CenterTop"
         })
     end
