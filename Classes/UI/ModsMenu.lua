@@ -189,7 +189,8 @@ function BeardLibModsMenu:AddMod(mod, framework)
             alone_in_row = true,
 			auto_foreground = auto_color,
             count_as_aligned = true,
-            texture = img or "guis/textures/pd2/none_icon",
+            texture = img or "ui/atlas/menu/raid_atlas_menu",
+            texture_rect = not img and { 353, 894, 100, 100 },
             position = "CenterTop"
         })
     end
@@ -208,10 +209,12 @@ function BeardLibModsMenu:AddMod(mod, framework)
         text("Disabled", "["..managers.localization:text("beardlib_mod_disabled").."]")
     end
 
-    if loc._custom_localizations[txt] then
-		text("Type", "["..loc:text("beardlib_mod_type_" .. type).."]")
-	else
-		text("Type", "["..cap(type).."]")
+    if type ~= FrameworkBase.type_name then
+        if loc._custom_localizations[txt] then
+            text("Type", "["..loc:text("beardlib_mod_type_" .. type).."]")
+        else
+            text("Type", "["..cap(type).."]")
+        end
     end
 
     text("Title", tostring(name))
@@ -428,13 +431,13 @@ function BeardLibModsMenu:OpenSettings()
                 value = BeardLib.Options:GetValue("DevMode"),
                 on_callback = ClassClbk(self, "SetOption")
             })
-            holder:Toggle({
-                name = "GithubUpdates",
-                text = "beardlib_github_updates",
-                help = "beardlib_github_updates_help",
-                value = BeardLib.Options:GetValue("GithubUpdates"),
-                on_callback = ClassClbk(self, "SetOption")
-            })
+            -- holder:Toggle({
+            --     name = "GithubUpdates",
+            --     text = "beardlib_github_updates",
+            --     help = "beardlib_github_updates_help",
+            --     value = BeardLib.Options:GetValue("GithubUpdates"),
+            --     on_callback = ClassClbk(self, "SetOption")
+            -- })
             holder:Toggle({
                 name = "LogSounds",
                 text = "beardlib_log_sounds",

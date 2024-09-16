@@ -50,7 +50,6 @@ function ListDialog:CreateShortcuts(params)
     local offset = {4, 0}
     local bw = self._menu:Toggle({
         name = "Limit",
-        w = bw,
         offset = offset,
         text = ">|",
         help = "beardlib_limit_results",

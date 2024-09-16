@@ -49,7 +49,7 @@ function ModAssetsModule:Load()
 
 	if self.config.install_directory and self.config.use_local_path ~= true then
 		local dir = self.config.install_directory
-        self.install_directory = ModCore:GetRealFilePath(dir, self) or BeardLib.config.mod_override_dir
+        self.install_directory = ModCore:GetRealFilePath(dir, self) or BeardLib.config.mods_directory
 	else
 		self.install_directory = Path:GetDirectory(path)
 	end
