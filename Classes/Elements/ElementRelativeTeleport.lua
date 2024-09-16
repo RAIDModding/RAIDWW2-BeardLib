@@ -70,10 +70,6 @@ function ElementRelativeTeleport:on_executed(instigator, ...)
 				mvector3.set(current_state._last_velocity_xy, saved_player_velocity)
 				instigator:mover():set_velocity(current_state._last_velocity_xy)
 			end
-
-			if _G.IS_VR then
-				movement:set_ghost_position(pos)
-			end
 		else
 			instigator:warp_to(new_rot, new_pos)
 			instigator:set_velocity(instigator_velocity)

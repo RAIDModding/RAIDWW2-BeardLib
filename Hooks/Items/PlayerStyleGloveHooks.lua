@@ -270,7 +270,6 @@ elseif F == "criminalsmanager" then
 
 	function CriminalsManager.set_beardlib_character_visual_state(unit, character_name, visual_state)
 		if not alive(unit) then return end
-		if _G.IS_VR and unit:camera() then return end
 
 		local is_local_peer = visual_state.is_local_peer
 		local visual_seed = visual_state.visual_seed
@@ -621,18 +620,6 @@ elseif F == "menuscenemanager" then
 
 	Hooks:PostHook(MenuSceneManager, "on_set_preferred_character", "BeardLibOnSetPreferredCharacterGloveVars", function(self)
 		self:set_character_gloves_and_variation(managers.blackmarket:equipped_glove_id(), managers.blackmarket:get_glove_variation(), self._character_unit)
-	end)
-
-	Hooks:PostHook(MenuSceneManager, "on_close_infamy_menu", "BeardLibOnCloseInfamyMenuGloveVars", function(self)
-		if _G.IS_VR then
-			self:set_character_gloves_and_variation(managers.blackmarket:equipped_glove_id(), managers.blackmarket:get_glove_variation(), self._character_unit)
-		end
-	end)
-
-	Hooks:PostHook(MenuSceneManager, "remove_gloves", "BeardLibRemoveGlovesGloveVars", function(self)
-		if _G.IS_VR then
-			self:set_character_gloves_and_variation(managers.blackmarket:equipped_glove_id(), managers.blackmarket:get_glove_variation(), self._character_unit)
-		end
 	end)
 
 	Hooks:PostHook(MenuSceneManager, "set_character_gloves", "BeardLibSetGlovesGloveVars", function(self, glove_id, unit)

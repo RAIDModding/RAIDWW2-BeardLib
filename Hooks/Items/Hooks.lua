@@ -132,10 +132,6 @@ elseif F == "blackmarketmanager" then
                 return x_td.custom == nil
             end
 
-            if _G.IS_VR and xd.vr_locked ~= yd.vr_locked then
-                return not xd.vr_locked
-            end
-
             if xd.unlocked ~= yd.unlocked then
                 return xd.unlocked
             end
