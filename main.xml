@@ -90,7 +90,7 @@
 		<Options build_menu="false">
 			<options>
 				<option name="ShowImages" type="boolean" default_value="true"/>
-				<option name="MenuColor" type="color" default_value="Color('007af3')"/>
+				<option name="MenuColor" type="color" default_value="Color('DE4A3E')"/>
 				<option name="ImportantNotice" type="boolean" default_value="true"/>
 				<option name="ShowErrorsDialog" type="boolean" default_value="true"/>
 				<option name="DevMode" type="boolean" default_value="false"/>
