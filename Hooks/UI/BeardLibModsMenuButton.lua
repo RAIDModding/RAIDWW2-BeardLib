@@ -5,11 +5,11 @@ Hooks:Add("MenuManagerInitialize", "BeardLibModsManagerButtons", function()
 
     RaidMenuHelper:InjectButtons("raid_menu_left_options", "network", {
         {
-            text = managers.localization:text("beardlib_mods_manager"),
+            text = utf8.to_upper(managers.localization:text("beardlib_mods_manager")),
             callback = "BeardLibMenu"
         },
         {
-            text = managers.localization:text("beardlib_achieves_title"),
+            text = utf8.to_upper(managers.localization:text("beardlib_achieves_title")),
             callback = "BeardLibAchievementsMenu"
         }
     }, true)
