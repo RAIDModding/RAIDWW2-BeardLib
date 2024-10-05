@@ -163,7 +163,7 @@ function BeardLibPackageManager:LoadConfig(directory, config, mod, settings)
     local ingame = Global.level_data and Global.level_data.level_id ~= nil
     local inmenu = not ingame
 
-    local game = BeardLib:GetGame() or "pd2"
+    local game = BeardLib:GetGame() or "raid"
     BeardLib:DevLog("BeardLibPackageManager " .. "prefor")
     local loading = {}
     for _, child in ipairs(config) do

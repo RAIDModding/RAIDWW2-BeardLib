@@ -21,12 +21,10 @@ elseif F == "setup" then
 	end)
 
 	Hooks:PostHook(Setup, "init_finalize", "BeardLibInitFinalize", function(self)
-		BeardLib.Managers.Sound:Open()
 		Hooks:Call("BeardLibSetupInitFinalize", self)
 	end)
 
 	Hooks:PostHook(Setup, "unload_packages", "BeardLibUnloadPackages", function(self)
-		BeardLib.Managers.Sound:Close()
 		BeardLib.Managers.Package:Unload()
 		Hooks:Call("BeardLibSetupUnloadPackages", self)
 	end)
@@ -49,9 +47,7 @@ elseif F == "networkpeer" then
 elseif F == "tweakdata" then
 	TweakDataHelper:Apply()
 elseif F == "networktweakdata" then
-	if BeardLib:GetGame() ~= "pd2" then
-		for _, framework in pairs(BeardLib.Frameworks) do framework:RegisterHooks() end
-	end
+	for _, framework in pairs(BeardLib.Frameworks) do framework:RegisterHooks() end
 	--Makes sure that rect can be returned as a null if it's a custom icon
 	local get_icon = HudIconsTweakData.get_icon_data
 	function HudIconsTweakData:get_icon_data(id, rect, ...)

@@ -104,10 +104,6 @@ function LevelModule:Load()
         end
     end
 
-    if self._config.sounds then --Sounds unload automatically.
-        --SoundsModule:new(self._mod, self._config.sounds)
-    end
-
     self._addfiles_modules = {}
 
     self._add_path = self._level_dir.."/add.xml"

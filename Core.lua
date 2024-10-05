@@ -47,11 +47,7 @@ function BeardLib:Init()
 	self:LoadModules(modules_config, modules.."Addons/")
 	self:LoadModules(modules_config, modules.."Utils/")
 
-	if BeardLib:GetGame() == "raid" then
-		self:LoadModules(modules_config, modules.."Raid/")
-	else
-		self:LoadModules(modules_config, modules.."PD2/")
-	end
+	self:LoadModules(modules_config, modules.."Raid/")
 	self:LoadLocalization()
 
 	for _, init in pairs(self._classes_to_init) do
@@ -112,7 +108,7 @@ end
 
 --- Returns the name of the current game. If BLT is not setup to do so, assume we are in PD2.
 function BeardLib:GetGame()
-	return blt.blt_info().game or 'pd2'
+	return blt.blt_info().game or "raid"
 end
 
 function BeardLib:LoadClasses(config, prev_dir)
@@ -121,7 +117,7 @@ function BeardLib:LoadClasses(config, prev_dir)
 	config = config or self._config[wanted_meta]
 	local dir = Path:Combine(prev_dir or self.ModPath, config.directory)
     for _, c in ipairs(config) do
-        if not c.game or (BeardLib:GetGame() or "pd2") == c.game then
+        if not c.game or (BeardLib:GetGame() or "raid") == c.game then
 			if c._meta == "class" then
 				self:DevLog("Loading class %s", tostring(c.file))
 				dofile(dir and Path:Combine(dir, c.file) or c.file)
@@ -441,27 +437,6 @@ Hooks:Add("MenuManagerOnOpenMenu", "BeardLibShowErrors", function(self, menu)
 	if menu == "menu_main" and not LuaNetworking:IsMultiplayer() then
 		if BeardLib.Options:GetValue("ShowErrorsDialog") and table.size(BeardLib._errors) > 0 then
 			BeardLib:ShowErrorsDialog()
-		end
-
-		if (BeardLib:GetGame() or "pd2") == "pd2" then
-			-- Add Crime.Net custom maps only button to the filters
-			function MenuCallbackHandler:beardlib_custom_maps_only(item)
-				local val = item:value() == "on"
-				BeardLib.Options:SetValue("CustomMapsOnlyFilter", val)
-				Global.game_settings.custom_maps_only = val
-				managers.network.matchmake:search_lobby(managers.network.matchmake:search_friends_only())
-			end
-
-
-			local node = MenuHelperPlus:GetNode(nil, "crimenet_filters")
-			MenuHelperPlus:AddToggle({
-				id = "beardlib_custom_maps_only",
-				title = "beardlib_custom_maps_only",
-				node = node,
-				value = Global.game_settings.custom_maps_only,
-				position = 13,
-				callback = "beardlib_custom_maps_only",
-			})
 		end
 	end
 end)
