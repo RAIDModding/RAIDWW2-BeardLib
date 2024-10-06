@@ -5,9 +5,6 @@ A large library that assists in mod creation.
 - Modules Framework
 - Easy ability to add content. Such as Masks, Melee Weapons, Weapon Mods etc
 
-## Editors
-Editors were moved to BeardLib-Editor a while ago, get them there [BeardLib-Editor](https://github.com/RAIDModding/BeardLib-Editor)
-
 ## Documentation
 There is no proper documentation for the Raid version yet,
 however, most of the doc for the pd2 version should fit for now: [wiki](https://luffyyy.gitbook.io/beardlib)
@@ -21,5 +18,6 @@ You can download a stable release from modworkshop: https://modworkshop.net/mod/
 ## Templates
 You can find them here: https://github.com/ModWorkshop/BeardLib-Templates
 
-## A few mods that make use of RAID-BeardLib
+## Mods that make use of RAID-BeardLib
+* [BeardLib-Editor](https://github.com/RAIDModding/BeardLib-Editor)
 * tba
