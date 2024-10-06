@@ -13,7 +13,7 @@ however, most of the doc for the pd2 version should fit for now: [wiki](https://
 You can download a stable release from modworkshop: https://modworkshop.net/mod/14924
 
 ## Dependencies
-* [SuperBLT](https://superblt.znix.xyz)
+* [RAID-SuperBLT](https://modworkshop.net/mod/49744)
 
 ## Templates
 You can find them here: https://github.com/ModWorkshop/BeardLib-Templates
