@@ -29,7 +29,7 @@
 				<option name="ImportantNotice" type="boolean" default_value="true"/>
 				<option name="ShowErrorsDialog" type="boolean" default_value="true"/>
 				<option name="DevMode" type="boolean" default_value="false"/>
-				<!-- <option name="GithubUpdates" type="boolean" default_value="true"/> -->
+				<option name="GithubUpdates" type="boolean" default_value="true"/>
 				<option name="LogSounds" type="boolean" default_value="false"/>
 				<option name="OptimizedMusicLoad" type="boolean" default_value="true"/>
 				<option name="CustomMapsOnlyFilter" type="boolean" default_value="false"/>

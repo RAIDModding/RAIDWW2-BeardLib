@@ -75,16 +75,15 @@ function BeardLib:Init()
 	self.OptimizedMusicLoad = BeardLib.Options:GetValue("OptimizedMusicLoad")
 
 	if ModAssetsModule then
-		-- if self.Options:GetValue("GithubUpdates") then
-		local module = ModAssetsModule:new(self, {id = "RAIDModding/RAIDWW2-BeardLib", _meta = "AssetUpdates", important = true, provider = "github", branch = "master"})
-		self[module._name] = module
-		table.insert(self._modules, module)
-		-- else
-		-- 	-- FIXME
-		-- 	local module = ModAssetsModule:new(self, {id = 14924, semantic_version = true, version = self.config.version, _meta = "AssetUpdates", important = true, provider = "modworkshop"})
-		-- 	self[module._name] = module
-		-- 	table.insert(self._modules, module)
-		-- end
+		if self.Options:GetValue("GithubUpdates") then
+			local module = ModAssetsModule:new(self, {id = "RAIDModding/RAIDWW2-BeardLib", _meta = "AssetUpdates", important = true, provider = "github", branch = "master"})
+			self[module._name] = module
+			table.insert(self._modules, module)
+		else
+		 	local module = ModAssetsModule:new(self, {id = 49760, semantic_version = true, version = self.config.version, _meta = "AssetUpdates", important = true, provider = "modworkshop"})
+		 	self[module._name] = module
+		 	table.insert(self._modules, module)
+		 end
 	end
 
 	self:MigrateModSettings()
