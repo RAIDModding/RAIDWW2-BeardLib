@@ -15,6 +15,8 @@ You can download a stable release from modworkshop: https://modworkshop.net/mod/
 ## Dependencies
 * [RAID-SuperBLT](https://modworkshop.net/mod/49744)
 
+NOTE: RAIDWW2-BeardLib does NOT work with RaidBLT!
+
 ## Templates
 You can find them here: https://github.com/ModWorkshop/BeardLib-Templates
 
