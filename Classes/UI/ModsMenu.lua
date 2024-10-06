@@ -431,13 +431,13 @@ function BeardLibModsMenu:OpenSettings()
                 value = BeardLib.Options:GetValue("DevMode"),
                 on_callback = ClassClbk(self, "SetOption")
             })
-            -- holder:Toggle({
-            --     name = "GithubUpdates",
-            --     text = "beardlib_github_updates",
-            --     help = "beardlib_github_updates_help",
-            --     value = BeardLib.Options:GetValue("GithubUpdates"),
-            --     on_callback = ClassClbk(self, "SetOption")
-            -- })
+            holder:Toggle({
+                name = "GithubUpdates",
+                text = "beardlib_github_updates",
+                help = "beardlib_github_updates_help",
+                value = BeardLib.Options:GetValue("GithubUpdates"),
+                on_callback = ClassClbk(self, "SetOption")
+            })
             holder:Toggle({
                 name = "LogSounds",
                 text = "beardlib_log_sounds",

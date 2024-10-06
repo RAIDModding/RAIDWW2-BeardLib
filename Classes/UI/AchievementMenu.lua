@@ -138,7 +138,7 @@ function BeardLibAchievementMenu:InitAccount()
 		inherit_values = {offset = {0, 3}},
 		w = panel:ItemsWidth() - steam_avatar:OuterWidth() - panel:OffsetX()*2
 	})
-	local steam_name = managers.network.account:username()
+	local steam_name = Steam:username()
 
 	if Steam and Steam.friend_avatar then
 		Steam:friend_avatar(2, Steam:userid(), function (texture)

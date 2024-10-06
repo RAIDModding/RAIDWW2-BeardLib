@@ -241,7 +241,13 @@ function FileIO:CopyToAsync(path, to_path, callback)
 end
 
 function FileIO:MoveTo(path, to_path)
-	SystemFS:rename_file(path, to_path)
+	if file.DirectoryExists(path) then
+		-- prefer file.MoveDirectory over SystemFS:rename_file for directory moving.
+		-- same reason as in FileIO:Delete. SystemFS is trash!
+		file.MoveDirectory(path, to_path)
+	else
+		SystemFS:rename_file(path, to_path)
+	end
 end
 
 function FileIO:CanWriteTo(path)
@@ -253,7 +259,12 @@ function FileIO:CanWriteTo(path)
 end
 
 function FileIO:Delete(path)
-	if SystemFS and SystemFS.delete_file then
+	if file.DirectoryExists(path) then
+		-- prefer io.remove_directory_and_files over SystemFS:delete_file for directory deletion.
+		-- this might be slower, but this fixes mods with dotfile not being able to update themselves!
+		-- because SystemFS:delete_file does not properly clean dotfiles recursively!
+		io.remove_directory_and_files(path)
+	elseif SystemFS and SystemFS.delete_file then
 		SystemFS:delete_file(path)
 	else
 		error("[BeardLib] Cannot delete files or folders [SystemFS not available]")

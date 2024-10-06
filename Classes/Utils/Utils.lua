@@ -301,13 +301,6 @@ function type_name(value)
     return t
 end
 
---Safe call
-function Utils:SetupXAudio()
-    if blt and blt.xaudio then
-        blt.xaudio.setup()
-    end
-end
-
 --- Makes a pagination (table) in the style of 1 .. 3 [4] 5 .. 7
 --- Page is the page, pages is how many pages and offset_buttons is how many buttons to put on both sides of the current page.
 function Utils:MakePagination(page, pages, offset_buttons)

@@ -5,10 +5,6 @@ function Easing._linear(a, b, t)
 	return mlerp(a, b, t)
 end
 
-if BeardLib:GetGame() ~= "raid" then
-    return
-end
-
 function Easing.in_quad(a, b, t)
 	return (b - a) * t * t + a
 end
