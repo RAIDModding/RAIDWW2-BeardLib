@@ -13,7 +13,7 @@ however, most of the doc for the pd2 version should fit for now: [wiki](https://
 You can download a stable release from modworkshop: https://modworkshop.net/mod/14924
 
 ## Dependencies
-* [RAID-SuperBLT](https://modworkshop.net/mod/49744) (not released yet)
+* [RAID-SuperBLT](https://modworkshop.net/mod/49744)
 
 NOTE: RAIDWW2-BeardLib does NOT work with RaidBLT!
 
@@ -21,5 +21,5 @@ NOTE: RAIDWW2-BeardLib does NOT work with RaidBLT!
 You can find them here: https://github.com/ModWorkshop/BeardLib-Templates
 
 ## Mods that make use of RAID-BeardLib
-* [BeardLib-Editor](https://github.com/RAIDModding/BeardLib-Editor)
+* [BeardLib-Editor](https://github.com/RAIDModding/BeardLib-Editor) (not released yet)
 * tba
