@@ -3,7 +3,7 @@ A large library that assists in mod creation.
 - Script File Manipulation.
 - Custom Heist framework
 - Modules Framework
-- Easy ability to add content. Such as Masks, Melee Weapons, Weapon Mods etc
+- Easy ability to add content
 
 ## Documentation
 There is no proper documentation for the Raid version yet,
