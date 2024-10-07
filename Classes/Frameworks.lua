@@ -100,7 +100,9 @@ function FrameworkBase:FindMods()
             if not self._ignore_folders[folder_name] then
                 local directory = path:CombineDir(self._directory, folder_name)
                 local main_file = path:Combine(directory, self.main_file_name)
-                local mod_file = path:Combine(directory, "mod.xml")
+                local mod_xml = path:Combine(directory, "mod.xml")
+                local mod_json = path:Combine(directory, "mod.txt")
+                local supermod_xml = path:Combine(directory, "supermod.xml")
 				local add_file = path:Combine(directory, self.add_file)
 
 				-- Prevent loading when DB isn't available
@@ -108,9 +110,10 @@ function FrameworkBase:FindMods()
 					self:FindOverrides(directory)
 				end
 
-				-- If a mod has a mod.xml, read that instead.
-				if FileIO:Exists(mod_file) then
-					main_file = mod_file
+				-- provide backwards compat for RaidBLT mods (mod.txt), if not a SuperBLT-ready mod
+				if FileIO:Exists(mod_xml) and not FileIO:Exists(supermod_xml) and not FileIO:Exists(mod_json) then
+					self:log("providing legacy compat for RaidBLT mod: %s", folder_name)
+					main_file = mod_xml
 				end
 
 				-- Read main.xml
