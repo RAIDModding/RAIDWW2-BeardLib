@@ -1,34 +1,25 @@
-# PAYDAY-2-BeardLib
+# RAIDWW2-BeardLib
 A large library that assists in mod creation.
 - Script File Manipulation.
 - Custom Heist framework
 - Modules Framework
-- Easy ability to add content. Such as Masks, Melee Weapons, Weapon Mods etc
-
-## Editors
-Editors were moved to BeardLib-Editor a while ago, get them there [BeardLib-Editor](https://github.com/GreatBigBushyBeard/PAYDAY-2-BeardLib-Editor)
+- Easy ability to add content
 
 ## Documentation
-The main documentation can be found on the [wiki](https://github.com/GreatBigBushyBeard/PAYDAY-2-BeardLib/wiki) for this repo.
+There is no proper documentation for the Raid version yet,
+however, most of the doc for the pd2 version should fit for now: [wiki](https://luffyyy.gitbook.io/beardlib)
 
 ## Download
 You can download a stable release from modworkshop: https://modworkshop.net/mod/14924
 
 ## Dependencies
-* [SuperBLT](https://superblt.znix.xyz)
+* [RAID-SuperBLT](https://modworkshop.net/mod/49744)
+
+NOTE: RAIDWW2-BeardLib does NOT work with RaidBLT!
 
 ## Templates
 You can find them here: https://github.com/ModWorkshop/BeardLib-Templates
 
-## A few mods that make use of BeardLib
-* PD:TH Hud: [ModWorkshop](https://modworkshop.net/mod/19900)
-* Death Wish+: [ModWorkshop](http://modworkshop.net/mod/14384)
-* SC's Mod: [ModWorkshop](http://modworkshop.net/mod/17254)
-* HoloUI: [GitHub](https://github.com/Luffyyy/HoloUI) [ModWorkshop](http://modworkshop.net/mod/12501)
-* Restoration Mod: [ModWorkshop](https://modworkshop.net/mod/428)
-* And a lot more in here: [ModWorkshop](https://modworkshop.net/find/mod?gid=1&tags=11)
-
-## Custom content mods
-* [Custom heists](https://modworkshop.net/category/502)
-* [Custom weapons and weapon mods](https://modworkshop.net/category/528)
-* [Custom masks](https://modworkshop.net/category/8)
+## Mods that make use of RAID-BeardLib
+* [BeardLib-Editor](https://github.com/RAIDModding/BeardLib-Editor) (not released yet)
+* tba
