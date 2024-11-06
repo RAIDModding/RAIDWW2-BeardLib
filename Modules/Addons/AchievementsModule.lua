@@ -11,7 +11,7 @@ function AchievementsModule:RegisterHook()
     self._package_banner = self._config.banner
     self._package_desc = self._config.desc
 
-    Hooks:PostHook(AchievementsTweakData, "init", self._package_id .. "_custom_achievement_data", function(a_self, tweak_data)
+    Hooks:PostHook(AchievementTweakData, "init", self._package_id .. "_custom_achievement_data", function(a_self, tweak_data)
         if not a_self.custom_achievements then
             a_self.custom_achievements = {}
             a_self.custom_achievements_packages = {}
