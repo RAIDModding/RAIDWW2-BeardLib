@@ -110,7 +110,7 @@ function FrameworkBase:FindMods()
 					self:FindOverrides(directory)
 				end
 
-				-- provide backwards compat for RaidBLT mods (mod.txt), if not a SuperBLT-ready mod
+				-- provide backwards compat for RaidBLT mods (mod.xml), if not a SuperBLT-ready mod
 				if FileIO:Exists(mod_xml) and not FileIO:Exists(supermod_xml) and not FileIO:Exists(mod_json) then
 					self:log("providing legacy compat for RaidBLT mod: %s", folder_name)
 					main_file = mod_xml
