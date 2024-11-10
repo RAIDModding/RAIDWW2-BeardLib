@@ -64,6 +64,7 @@ beardlib_achieves_reward_exp: Esperienza
 beardlib_achieves_reward_gold: Gold
 beardlib_achieves_hidden: "Achievement nascosto"
 beardlib_achieves_hidden_desc: "I dettagli verranno rivelati dopo aver sbloccato l'achievement."
+beardlib_achieves_achieved: Achievement unlocked
 beardlib_log_sounds: "Log degli ID dei suoni"
 beardlib_log_sounds_help: "Crea un log di tutti gli ID dei suoni. Utile quando vuoi sostituire suoni già presenti e non ne conosci l'ID."
 beardlib_found_errors: "Una o più mod di BeardLib hanno riscontrato un'errore"

@@ -64,6 +64,7 @@ beardlib_achieves_reward_exp: Experiencia
 beardlib_achieves_reward_gold: Gold
 beardlib_achieves_hidden: "Logro oculto"
 beardlib_achieves_hidden_desc: "Los detalles de este logro serán visibles una vez que haya sido desbloqueado."
+beardlib_achieves_achieved: Achievement unlocked
 beardlib_log_sounds: "Registrar las IDs de los sonidos"
 beardlib_log_sounds_help: "Registra cada sonido con su ID correspondiente. Esto puede ser útil cuando quieras reemplazar sonidos ya existentes y no sepas sus IDs."
 beardlib_found_errors: "Uno o más mods de BeardLib han tenido un error"

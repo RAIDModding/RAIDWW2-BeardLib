@@ -469,12 +469,18 @@ function CustomAchievement:Unlock()
     self._unlocked = true
     self._timestamp_unlocked = os.time()
 
-    if HudChallengeNotification then
-        HudChallengeNotification.queue(
-            managers.localization:to_upper_text("hud_achieved_popup"),
-            managers.localization:to_upper_text(self._name_id),
-            self._icon_path or "placeholder_circle"
-        )
+    if managers.notification then
+        local notification_params = {
+            sound_effect = "daily_login_reward",
+            id = "beardlib_custom_achievement_" .. self._name_id,
+            duration = 3,
+            shelf_life = 5,
+            notification_type = HUDNotification.CUSTOM_ACHIEVEMENT,
+            text = managers.localization:to_upper_text("beardlib_achieves_achieved") .. '\n' .. managers.localization:text(self._name_id),
+            icon = self._icon_path,
+            icon_color = Color(self:GetRankColor()),
+        }
+        managers.notification:add_notification(notification_params)
     end
 
     self:GiveReward()
