@@ -455,7 +455,7 @@ function TextBoxBase:MousePressed(button, x, y)
         self:update_caret()
     end
 
-    return self.cantype and cantype
+    return self.cantype and active
 end
 
 function TextBoxBase:MouseMoved(x, y)

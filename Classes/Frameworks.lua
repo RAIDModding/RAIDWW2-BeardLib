@@ -314,7 +314,7 @@ function FrameworkBase:RemoveMod(folder_name)
 end
 
 function FrameworkBase:AddCustomContact()
-	if not FrameworkBase._added_contact and ContactModule then
+	if not FrameworkBase._added_contact and ContactModule then -- FIXME
 		FrameworkBase._added_contact = true
 		ContactModule:new(BeardLib, {
 			id = "custom",

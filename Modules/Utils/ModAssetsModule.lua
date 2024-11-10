@@ -235,7 +235,7 @@ function ModAssetsModule:StoreDownloadedAssets(data, id, request_info)
 
         local temp_zip_path = Application:nice_path(BLTModManager.Constants:DownloadsDirectory() .. id .. ".zip")
         local temp_extract_path = Application:nice_path(BLTModManager.Constants:DownloadsDirectory() .. id)
-        local file = io.open(temp_zip_path, "wb+")
+        local file = io.open(temp_zip_path, "w+b")
 
         -- Write downloaded data to file
         if file then

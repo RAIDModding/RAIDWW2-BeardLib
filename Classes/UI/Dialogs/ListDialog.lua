@@ -104,7 +104,7 @@ function ListDialog:_Show(params)
     self:MakeListItems(params)
 end
 
-function ListDialog:CreateTopMenu()
+function ListDialog:CreateTopMenu(params)
     self._menu:ClearItems()
     local offset, bw = self:CreateShortcuts(params)
     local close = self._menu:ImageButton({

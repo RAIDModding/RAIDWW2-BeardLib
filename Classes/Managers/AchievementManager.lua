@@ -2,7 +2,7 @@ BeardLibAchievementManager = BeardLibAchievementManager or BeardLib:ManagerClass
 
 function BeardLibAchievementManager:init()
     -- Support multiple user on same PC, tracking each progress
-    local user_id = Steam and Steam:userid() or EpicEntitlements and EpicEntitlements:get_account_id() or "unknown"
+    local user_id = Steam and Steam:userid() or "unknown"
     self._achievements_folder = SavePath .. "CustomAchievements/" ..tostring(user_id).."/"
     self._achievement_icons_spoofer = {}
     self._ranks = {
@@ -418,9 +418,11 @@ end
 function CustomAchievement:LoadProgress()
     local progress_data = json.custom_decode(FileIO:ReadFrom(self._progress_file))
 
-    self._saved_amount = progress_data.amount
-    self._unlocked = progress_data.completed
-    self._timestamp_unlocked = progress_data.date_unlocked
+    if progress_data then
+        self._saved_amount = progress_data.amount
+        self._unlocked = progress_data.completed
+        self._timestamp_unlocked = progress_data.date_unlocked
+    end
 end
 
 function CustomAchievement:SaveProgress()

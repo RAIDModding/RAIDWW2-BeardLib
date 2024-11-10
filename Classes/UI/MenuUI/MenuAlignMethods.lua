@@ -102,7 +102,7 @@ function Item:AlignItemsNormal(reversed)
                     local offset = item:Offset()
                     local panel = item:Panel()
                     panel:set_x(offset[1])
-                    if alive(prev_item) then
+                    if prev_item and alive(prev_item) then
                         panel:set_world_y(prev_item:Panel():world_bottom() + offset[2])
                     else
                         panel:set_y(offset[2])

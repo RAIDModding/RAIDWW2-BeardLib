@@ -276,7 +276,7 @@ end
 function ModCore:RegisterHook(source_file, file, pre)
 	local path = self:GetPath()
     local hook_file = Path:Combine(path, file)
-    local dest_tbl = pre and (_prehooks or (BLT and BLT.hook_tables.pre)) or (_posthooks or (BLT and BLT.hook_tables.post))
+    local dest_tbl = pre and (_prehooks or (BLT and BLT.hook_tables.pre)) or (_posthooks or (BLT and BLT.hook_tables.post)) -- FIXME _prehooks _posthooks?
 	if dest_tbl then
 		if FileIO:Exists(hook_file) then
 			local req_script = source_file:lower()

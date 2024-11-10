@@ -12,7 +12,7 @@ function KeyBindItem:Init()
         align = "center",
         vertical = self.text_vertical,
         layer = 3,
-        color = self:GetForeground(highlight),
+        color = self:GetForeground(),
         font = self.font,
         font_size = self.size
     })
@@ -176,5 +176,5 @@ function KeyBindItem:MousePressed(button, x, y)
 end
 
 function KeyBindItem:GetKeyBind()
-    return Idstring(item.value)
+    return Idstring(self.value)
 end

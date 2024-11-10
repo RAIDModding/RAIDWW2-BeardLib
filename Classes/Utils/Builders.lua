@@ -45,7 +45,7 @@ end
 -- Returns the length of the string, is terminal.
 -- @see StringBuilder
 function StringBuilder:length()
-    return string.length(self.string)
+    return string.len(self.string)
 end
 
 function StringBuilder:build()
