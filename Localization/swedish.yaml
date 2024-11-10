@@ -61,9 +61,7 @@ beardlib_achieves_header_rewards: Rewards
 beardlib_achieves_header_unlocked: Unlocked
 beardlib_achieves_header_unlocked_date: "Date: $time"
 beardlib_achieves_reward_exp: Experience
-beardlib_achieves_reward_cash: "Spendable Cash"
-beardlib_achieves_reward_offshore: "Offshore Cash"
-beardlib_achieves_reward_cc: "Continental Coins"
+beardlib_achieves_reward_gold: Gold
 beardlib_achieves_hidden: "Hidden Achievement"
 beardlib_achieves_hidden_desc: "Details will be revealed once the achievement is unlocked."
 beardlib_log_sounds: "Log sound IDs"

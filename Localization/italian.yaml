@@ -61,9 +61,7 @@ beardlib_achieves_header_rewards: Ricompense
 beardlib_achieves_header_unlocked: Sbloccato
 beardlib_achieves_header_unlocked_date: "Data: $time"
 beardlib_achieves_reward_exp: Esperienza
-beardlib_achieves_reward_cash: Contanti
-beardlib_achieves_reward_offshore: "Conto Estero"
-beardlib_achieves_reward_cc: "Monete Continentali"
+beardlib_achieves_reward_gold: Gold
 beardlib_achieves_hidden: "Achievement nascosto"
 beardlib_achieves_hidden_desc: "I dettagli verranno rivelati dopo aver sbloccato l'achievement."
 beardlib_log_sounds: "Log degli ID dei suoni"

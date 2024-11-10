@@ -304,22 +304,16 @@ end
 CustomAchievement = CustomAchievement or class()
 
 CustomAchievement._MAX_EXP_AMOUNT = 10000000
-CustomAchievement._MAX_MONEY_AMOUNT = 50000000
-CustomAchievement._MAX_OFFSHORE_AMOUNT = 100000000
-CustomAchievement._MAX_CC_AMOUNT = 1000
+CustomAchievement._MAX_GOLD_AMOUNT = 5000
 
 CustomAchievement.limits = {
     xp = CustomAchievement._MAX_EXP_AMOUNT,
-    cc = CustomAchievement._MAX_CC_AMOUNT,
-    cash = CustomAchievement._MAX_MONEY_AMOUNT,
-    offshore = CustomAchievement._MAX_OFFSHORE_AMOUNT
+    gold = CustomAchievement._MAX_GOLD_AMOUNT,
 }
 
 CustomAchievement.valid_rewards = {
     "xp",
-    "cc",
-    "cash",
-    "offshore"
+    "gold",
 }
 
 function CustomAchievement:init(config, package)
@@ -526,19 +520,10 @@ function CustomAchievement:GiveReward()
         end
 
         if self._reward_type == "xp" then
-            managers.experience:debug_add_points(self._reward_amount, false)
+            managers.experience:add_points(self._reward_amount, false)
 
-        elseif self._reward_type == "cc" then
-            local current_cc = Application:digest_value(managers.custom_safehouse._global.total)
-            local new_cc = current_cc + self._reward_amount
-
-            Global.custom_safehouse_manager.total = Application:digest_value(new_cc, true)
-
-        elseif self._reward_type == "cash" then
-            managers.money:_add_to_total(self._reward_amount, {no_offshore = true})
-
-        elseif self._reward_type == "offshore" then
-            managers.money:add_to_offshore(self._reward_amount)
+        elseif self._reward_type == "gold" then
+            managers.gold_economy:add_gold(self._reward_amount)
 
         end
     end

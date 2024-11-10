@@ -5,9 +5,8 @@ local function thousand_sep(number)
 end
 
 local default_margin = 10
-local cash_icon = "guis/textures/pd2/blackmarket/cash_drop"
-local cc_icon = "guis/textures/pd2/ccoin"
-local xp_icon = "guis/textures/pd2/blackmarket/xp_drop"
+local xp_icon_rect = { 878, 590, 112, 96 }
+local gold_icon_rect = { 878, 100, 112, 96 }
 
 BeardLibAchievementMenu = BeardLibAchievementMenu or BeardLib:MenuClass("Achievement")
 
@@ -312,12 +311,56 @@ function BeardLibAchievementMenu:DisplayAchievementsFromPackage(package)
 		elseif not achievement:IsUnlocked() and achievement:HasAmountValue() then
 			local progress = achievement:CurrentAmountValue() / achievement:AmountValue()
 
-			TextProgressBar:new(achievement_button:Panel(), {
-				h = 16,
+			local loot_meter_parts_l = "loot_meter_parts_l"
+			local loot_meter_parts_m = "loot_meter_parts_m"
+			local loot_meter_parts_r = "loot_meter_parts_r"
+
+			-- background
+			local progress_background = RaidGUIControlThreeCutBitmap:new(achievement_button:Panel(), {
+				layer = 1,
+				name = "progress_bar_background",
+				h = 20,
 				w = achievement_button:Panel():w(),
-				y = achievement_button:Panel():h() - 16,
-				back_color = Color(255, 60, 60, 65) / 255,
-			}, {font = tweak_data.menu.pd2_medium_font, font_size = 16}, progress)
+				left = loot_meter_parts_l,
+				center = loot_meter_parts_m,
+				right = loot_meter_parts_r,
+				color = Color(255, 60, 60, 65) / 255
+			})
+			progress_background:set_y(achievement_button:Panel():h() - progress_background:h())
+
+			-- panel
+			local progress_panel = achievement_button:Panel():panel({
+				name = "progress_bar_panel",
+				x = progress_background:x(),
+				y = progress_background:y(),
+				w = progress_background:w() * progress,
+				h = progress_background:h(),
+				layer = progress_background:layer() + 1
+			})
+
+			-- foreground
+			RaidGUIControlThreeCutBitmap:new(progress_panel, {
+				name = "progress_bar_foreground",
+				w = progress_background:w(),
+				left = loot_meter_parts_l,
+				center = loot_meter_parts_m,
+				right = loot_meter_parts_r,
+				color = tweak_data.gui.colors.raid_white
+			})
+
+			-- text
+			local progress_text = achievement_button:Panel():text({
+				name = "progress_bar_text",
+				text = achievement:CurrentAmountValue() .. " / " .. achievement:AmountValue(),
+				font = tweak_data.gui.fonts.din_compressed_outlined_18,
+				font_size = 16,
+				color = Color.white,
+				layer = progress_background:layer() + 2
+			})
+			local _, _, w, h = progress_text:text_rect()
+			progress_text:set_size(w, h)
+			progress_text:set_center_x(achievement_button:Panel():center_x())
+			progress_text:set_y(achievement_button:Panel():h() - progress_text:h())
 		end
 	end
 
@@ -464,23 +507,17 @@ function BeardLibAchievementMenu:DisplayAchievementDetails(achievement)
 		local achiev_reward_panel = panel:Grid({h = 68, w = panel:Panel():w() - 10})
 		local rewards = thousand_sep(achievement:SanitizeMaxRewards(achievement:GetRewardAmount()))
 		local reward_loc
-		local reward_icon
+		local reward_icon_rect
 
 		if achievement:GetRewardType() == "xp" then
-			reward_icon = xp_icon
+			reward_icon_rect = xp_icon_rect
 			reward_loc = "beardlib_achieves_reward_exp"
-		elseif achievement:GetRewardType() == "cash" then
-			reward_icon = cash_icon
-			reward_loc = "beardlib_achieves_reward_cash"
-		elseif achievement:GetRewardType() == "offshore" then
-			reward_icon = cash_icon
-			reward_loc = "beardlib_achieves_reward_offshore"
-		elseif achievement:GetRewardType() == "cc" then
-			reward_icon = cc_icon
-			reward_loc = "beardlib_achieves_reward_cc"
+		elseif achievement:GetRewardType() == "gold" then
+			reward_icon_rect = gold_icon_rect
+			reward_loc = "beardlib_achieves_reward_gold"
 		end
 
-		achiev_reward_panel:Image({texture = reward_icon, h = 32, w = 32})
+		achiev_reward_panel:Image({texture = "ui/atlas/menu/raid_atlas_reward", texture_rect = reward_icon_rect, h = 42, w = 48})
 		achiev_reward_panel:FitDivider({text = managers.localization:to_upper_text(reward_loc) .. " + ".. rewards, offset = {6, 14}})
 	end
 
