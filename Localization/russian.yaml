@@ -61,11 +61,10 @@ beardlib_achieves_header_rewards: "Награды"
 beardlib_achieves_header_unlocked: "Выполнено"
 beardlib_achieves_header_unlocked_date: "Дата: $time"
 beardlib_achieves_reward_exp: "Опыт"
-beardlib_achieves_reward_cash: "Наличные"
-beardlib_achieves_reward_offshore: "Офшорный счет"
-beardlib_achieves_reward_cc: "Монеты Континенталя"
+beardlib_achieves_reward_gold: Gold
 beardlib_achieves_hidden: "Скрытое достижение"
 beardlib_achieves_hidden_desc: "Подробности будут видны, когда достижение будет разблокировано."
+beardlib_achieves_achieved: Achievement unlocked
 beardlib_log_sounds: "Регистрировать ID звуков"
 beardlib_log_sounds_help: "Регистрировать каждый проигрываемый звуковой ID. Может быть полезно в ситуации, когда вы хотите заменить существующий звук, но не знаете его ID."
 beardlib_found_errors: "Данные моды имеют ошибки"

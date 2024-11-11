@@ -461,8 +461,10 @@ function Item:ImageButton(params)
     local w = params.w or not params.icon_h and params.size
     local h = params.h or params.icon_h or params.size
     local _params = self:ConfigureItem(params)
-    _params.w = w or _params.w
-    _params.h = h or _params.h or _params.size
+	if _params then
+		_params.w = w or _params.w
+		_params.h = h or _params.h or _params.size
+	end
     return self:NewItem(BeardLib.Items.ImageButton:new(_params))
 end
 
@@ -506,7 +508,9 @@ end
 function Item:ToolBar(params)
     params.text = params.text or ""
     local _params = self:ConfigureItem(params)
-	_params.align_method = _params.align_method or "grid"
+	if _params then
+		_params.align_method = _params.align_method or "grid"
+	end
 
     return self:NewItem(BeardLib.Items.Holder:new(_params))
 end
@@ -746,7 +750,7 @@ function Item:GetMenus(match, deep, menus)
 				if not match or menu.name:find(match) then
 					table.insert(menus, menu)
 				elseif deep then
-					local item = menu:GetMenus(name, true, menus)
+					local item = menu:GetMenus(match, true, menus)
 					if item and item.name then
 						return item
 					end
@@ -1362,7 +1366,7 @@ end
 local enter_ids = Idstring("enter")
 function Item:KeyPressed(o, k)
 	if self.menu_type then
-		if self:Enabled() and (self:MouseFocused(x, y) or self.reach_ignore_focus) then
+		if self:Enabled() then
 			local dir = k == Idstring("down") and 1 or k == Idstring("up") and -1
 			local h = self.menu._highlighted
 			local next_item

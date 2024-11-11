@@ -212,6 +212,7 @@ function MenuItemColorButton:key_press(row_item, o, k)
 			text:replace_text("")
 		end
 	elseif self._key_pressed == Idstring("end") then
+        local n = utf8.len(text:text())
 		text:set_selection(n, n)
 	elseif self._key_pressed == Idstring("home") then
 		text:set_selection(0, 0)

@@ -96,7 +96,7 @@ function FileIO:ReadConfig(path, tbl)
 		file:close()
 		return config
 	else
-		log("[FileIO][ERROR] Config at %s doesn't exist!", tostring(path))
+		log(string.format("[FileIO][ERROR] Config at %s doesn't exist!", tostring(path)))
 	end
 end
 

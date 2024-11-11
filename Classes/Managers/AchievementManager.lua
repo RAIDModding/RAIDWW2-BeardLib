@@ -2,7 +2,7 @@ BeardLibAchievementManager = BeardLibAchievementManager or BeardLib:ManagerClass
 
 function BeardLibAchievementManager:init()
     -- Support multiple user on same PC, tracking each progress
-    local user_id = Steam and Steam:userid() or EpicEntitlements and EpicEntitlements:get_account_id() or "unknown"
+    local user_id = Steam and Steam:userid() or "unknown"
     self._achievements_folder = SavePath .. "CustomAchievements/" ..tostring(user_id).."/"
     self._achievement_icons_spoofer = {}
     self._ranks = {
@@ -304,22 +304,16 @@ end
 CustomAchievement = CustomAchievement or class()
 
 CustomAchievement._MAX_EXP_AMOUNT = 10000000
-CustomAchievement._MAX_MONEY_AMOUNT = 50000000
-CustomAchievement._MAX_OFFSHORE_AMOUNT = 100000000
-CustomAchievement._MAX_CC_AMOUNT = 1000
+CustomAchievement._MAX_GOLD_AMOUNT = 5000
 
 CustomAchievement.limits = {
     xp = CustomAchievement._MAX_EXP_AMOUNT,
-    cc = CustomAchievement._MAX_CC_AMOUNT,
-    cash = CustomAchievement._MAX_MONEY_AMOUNT,
-    offshore = CustomAchievement._MAX_OFFSHORE_AMOUNT
+    gold = CustomAchievement._MAX_GOLD_AMOUNT,
 }
 
 CustomAchievement.valid_rewards = {
     "xp",
-    "cc",
-    "cash",
-    "offshore"
+    "gold",
 }
 
 function CustomAchievement:init(config, package)
@@ -418,9 +412,11 @@ end
 function CustomAchievement:LoadProgress()
     local progress_data = json.custom_decode(FileIO:ReadFrom(self._progress_file))
 
-    self._saved_amount = progress_data.amount
-    self._unlocked = progress_data.completed
-    self._timestamp_unlocked = progress_data.date_unlocked
+    if progress_data then
+        self._saved_amount = progress_data.amount
+        self._unlocked = progress_data.completed
+        self._timestamp_unlocked = progress_data.date_unlocked
+    end
 end
 
 function CustomAchievement:SaveProgress()
@@ -473,12 +469,18 @@ function CustomAchievement:Unlock()
     self._unlocked = true
     self._timestamp_unlocked = os.time()
 
-    if HudChallengeNotification then
-        HudChallengeNotification.queue(
-            managers.localization:to_upper_text("hud_achieved_popup"),
-            managers.localization:to_upper_text(self._name_id),
-            self._icon_path or "placeholder_circle"
-        )
+    if managers.notification then
+        local notification_params = {
+            sound_effect = "daily_login_reward",
+            id = "beardlib_custom_achievement_" .. self._name_id,
+            duration = 3,
+            shelf_life = 5,
+            notification_type = HUDNotification.CUSTOM_ACHIEVEMENT,
+            text = managers.localization:to_upper_text("beardlib_achieves_achieved") .. '\n' .. managers.localization:text(self._name_id),
+            icon = self._icon_path,
+            icon_color = Color(self:GetRankColor()),
+        }
+        managers.notification:add_notification(notification_params)
     end
 
     self:GiveReward()
@@ -524,19 +526,10 @@ function CustomAchievement:GiveReward()
         end
 
         if self._reward_type == "xp" then
-            managers.experience:debug_add_points(self._reward_amount, false)
+            managers.experience:add_points(self._reward_amount, false)
 
-        elseif self._reward_type == "cc" then
-            local current_cc = Application:digest_value(managers.custom_safehouse._global.total)
-            local new_cc = current_cc + self._reward_amount
-
-            Global.custom_safehouse_manager.total = Application:digest_value(new_cc, true)
-
-        elseif self._reward_type == "cash" then
-            managers.money:_add_to_total(self._reward_amount, {no_offshore = true})
-
-        elseif self._reward_type == "offshore" then
-            managers.money:add_to_offshore(self._reward_amount)
+        elseif self._reward_type == "gold" then
+            managers.gold_economy:add_gold(self._reward_amount)
 
         end
     end

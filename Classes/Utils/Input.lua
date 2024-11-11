@@ -8,13 +8,13 @@ function InputUtils:Id(str) return str:id() end
 
 --Keyboard
 function InputUtils:Down(key) return self:Class():down(self:Id(key)) end
-function InputUtils:DownList() 
+function InputUtils:DownList()
     local device = self:Class()
     local orig_down_list = device:down_list()
     local down_list = {}
     for _, key in pairs(orig_down_list) do
         local _key = device:button_name_str(device:button_name(key))
-        if device_name == "mouse" and not _key:find("mouse") then
+        if device == Input:mouse() and not _key:find("mouse") then
             _key = "mouse " .. _key
         end
         table.insert(down_list, device:button_name_str(device:button_name(key)))
@@ -27,7 +27,7 @@ function InputUtils:Trigger(key, clbk) return self:Class():add_trigger(self:Id(k
 function InputUtils:RemoveTrigger(trigger) return self:Class():remove_trigger(trigger) end
 function InputUtils:TriggerRelease(key, clbk) return self:Class():add_release_trigger(self:Id(key), SafeClbk(clbk)) end
 
-function InputUtils:GetInputDevices(no_keyboard, no_mouse)
+function InputUtils:GetInputDevices(no_keyboard, no_mouse, no_controller)
     local input_devices = {}
     if not no_keyboard then
         input_devices.keyboard = self
@@ -82,7 +82,7 @@ function InputUtils:Triggered(trigger, check_mouse_too)
         return false
     end
     if check_mouse_too and trigger.key:find("mouse") then
-        return MouseInput:Pressed(trigger.key)
+        return MouseInput:Pressed(trigger.key) -- FIXME
     end
     if trigger.additional_key then
         if self:Down(trigger.key) and self:Pressed(trigger.additional_key) then

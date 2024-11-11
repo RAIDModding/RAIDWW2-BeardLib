@@ -577,13 +577,13 @@ function BeardLibModsMenu:SetModNormal(module)
         self:SetModStatus(mod_item, "beardlib_updated")
         self:SetModProgressBar(module, 0)
         mod_item:GetItem("Download"):SetEnabled(false)
-        self:UpdateTitle(mod)
+        self:UpdateTitle(module._mod)
         if mod_item._on_finish_download_clbk then
             mod_item._on_finish_download_clbk()
             mod_item._on_finish_download_clbk = nil
         end
     end
-    table.delete(self._waiting_for_update, mod)
+    table.delete(self._waiting_for_update, module._mod)
 end
 
 function BeardLibModsMenu:SetModStatus(mod_item, status, not_localized)

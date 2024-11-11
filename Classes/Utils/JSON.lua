@@ -106,7 +106,7 @@ function json.custom_encode (v, format, tabs)
     return 'null'
   end
 
-  assert(false,'encode attempt to encode unsupported type ' .. vtype .. ':' .. base.tostring(v))
+  assert(false,'encode attempt to encode unsupported type ' .. vtype .. ':' .. base.tostring(v)) -- FIXME: base
 end
 
 --- Encodes a string to be JSON-compatible.

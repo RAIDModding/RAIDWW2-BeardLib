@@ -4,7 +4,7 @@
     author="GREAT BIG BUSHY BEARD &amp; Luffy"
     contact="simon@modworkshop.net"
     priority="500"
-    version="5.0.2.1"
+    version="5.0.2.2"
     undisablable="true"
     is_library="true"
     color="0 0.44 1"
@@ -26,6 +26,7 @@
                 <post hook_id="lib/managers/menumanager" :script_path="Hooks.lua"/>
                 <post hook_id="core/lib/managers/coreguidatamanager" :script_path="Hooks.lua"/>
                 <post hook_id="lib/utils/easing" :script_path="Easing.lua"/>
+                <post hook_id="lib/managers/hud/hudnotification" :script_path="Notifications.lua"/>
             </group>
 
             <group :script_path="GeneralHooks.lua">
