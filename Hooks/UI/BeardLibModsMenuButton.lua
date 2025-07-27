@@ -1,5 +1,4 @@
 Hooks:Add("MenuManagerInitialize", "BeardLibModsManagerButtons", function()
-
     RaidMenuHelper:MakeClbk("BeardLibMenu", ClassClbk(BeardLib.Menus.Mods, "SetEnabled", true))
     RaidMenuHelper:MakeClbk("BeardLibAchievementsMenu", ClassClbk(BeardLib.Menus.Achievement, "SetEnabled", true))
 
@@ -17,13 +16,13 @@ Hooks:Add("MenuManagerInitialize", "BeardLibModsManagerButtons", function()
     }, true)
 end)
 
-Hooks:PostHook(BLTNotificationsGui, "_setup", "BeardLibModsManagerSetup", function(self)
+Hooks:PostHook(BLTNotificationsGui, "_layout", "BeardLibModsManagerSetup", function(self)
     self._beardlib_accent = BeardLib.Options:GetValue("MenuColor")
 
-    self._beardlib_panel = self._panel:parent():panel({
+    self._beardlib_panel = self._object:parent():panel({
         layer = 50,
         h = 36,
-        y = self._panel:y()-4,
+        y = self._object:y() - 4,
         name = "beardlib_panel"
     })
     self._beardlib_updates = self._beardlib_panel:panel({
@@ -43,7 +42,7 @@ Hooks:PostHook(BLTNotificationsGui, "_setup", "BeardLibModsManagerSetup", functi
     local icon = self._beardlib_updates:bitmap({
         name = "Icon",
         texture = "guis/textures/menu_ui_icons",
-        texture_rect = {93, 2, 32, 32},
+        texture_rect = { 93, 2, 32, 32 },
         color = self._beardlib_accent,
         layer = 5,
         w = 20,
@@ -66,6 +65,7 @@ Hooks:PostHook(BLTNotificationsGui, "_setup", "BeardLibModsManagerSetup", functi
     self._beardlib_achievements = self._beardlib_panel:bitmap({
         name = "CustomAchievments",
         texture = "guis/textures/achievement_trophy_white",
+        layer = 55,
         w = 28,
         h = 28,
         y = 8,
@@ -74,18 +74,14 @@ Hooks:PostHook(BLTNotificationsGui, "_setup", "BeardLibModsManagerSetup", functi
     })
 end)
 
-Hooks:PostHook(BLTNotificationsGui, "close", "BeardLibPanelClose", function(self)
-    self._ws:panel():remove(self._beardlib_panel)
-end)
-
 Hooks:PostHook(BLTNotificationsGui, "update", "BeardLibModsManagerUpdate", function(self)
-    if alive(self._beardlib_updates) and BeardLib.Menus.Mods then
+    if self._beardlib_updates and BeardLib.Menus.Mods then
         local updates = #BeardLib.Menus.Mods._waiting_for_update
-        if alive(self._beardlib_updates_count) and tonumber(self._beardlib_updates_count:text()) ~= updates then
+        if self._beardlib_updates_count and tonumber(self._beardlib_updates_count:text()) ~= updates then
             self._beardlib_updates_count:set_text(updates)
         end
-        if alive(self._panel) and alive(self._beardlib_panel) then
-            self._beardlib_panel:set_y(self._panel:y()-4)
+        if self._object and self._beardlib_panel then
+            self._beardlib_panel:set_y(self._object:y() - 4)
         end
     end
 end)
@@ -96,8 +92,8 @@ function BLTNotificationsGui:mouse_moved(o, x, y)
         return
     end
 
-    if alive(self._beardlib_updates) and alive(self._beardlib_achievements) then
-        if self._beardlib_achievements:inside(x,y) or self._beardlib_updates:inside(x,y)  then
+    if self._beardlib_updates and self._beardlib_achievements then
+        if self._beardlib_achievements:inside(x, y) or self._beardlib_updates:inside(x, y) then
             return true, "link"
         end
     end
@@ -106,22 +102,16 @@ end
 
 local mouse_press = BLTNotificationsGui.mouse_pressed
 function BLTNotificationsGui:mouse_pressed(o, button, x, y)
-    if tonumber(button) then -- Handle RAID difference
-		y = x
-		x = button
-		button = o
-	end
-
     if not self._enabled or button ~= Idstring("0") then
         return
     end
-    if alive(self._beardlib_updates) and self._beardlib_updates:inside(x,y) then
+    if self._beardlib_updates and self._beardlib_updates:inside(x, y) then
         BeardLib.Menus.Mods:SetEnabled(true)
         return true
     end
-    if alive(self._beardlib_achievements) and self._beardlib_achievements:inside(x,y) then
+    if self._beardlib_achievements and self._beardlib_achievements:inside(x, y) then
         BeardLib.Menus.Achievement:SetEnabled(true)
         return true
     end
-    return mouse_press(self, button, x, y)
+    return mouse_press(self, o, button, x, y)
 end
