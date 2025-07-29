@@ -43,7 +43,7 @@ function Sync:DownloadMap(level_name, job_id, udata, done_callback)
 						managers.job:_check_add_heat_to_jobs()
 						managers.crimenet:find_online_games(Global.game_settings.search_friends_only)
 						if done_callback then
-							done_callback(tweak_data.narrative.jobs[job_id] ~= nil)
+							done_callback(tweak_data.operations.missions[job_id] ~= nil)
 						end
 					end
 					map:DownloadAssets()
@@ -167,7 +167,7 @@ function Sync:GetCleanedBlueprint(blueprint, factory_id)
 end
 
 function Sync:GetSpoofedGrenade(grenade)
-	local grenade_tweak = tweak_data.blackmarket.projectiles[grenade]
+	local grenade_tweak = tweak_data.projectiles[grenade]
 	if grenade_tweak and grenade_tweak.custom then
 		return grenade_tweak.based_on or managers.blackmarket._defaults.grenade
 	end
