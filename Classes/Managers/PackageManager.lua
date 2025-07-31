@@ -233,7 +233,7 @@ function BeardLibPackageManager:LoadConfig(directory, config, mod, settings)
                     local dyn_load_menu = NotNil(child.load_in_menu, config.load_in_menu, false)
                     local dyn_load = NotNil(child.load, config.load, false)
                     BeardLib:DevLog("BeardLibPackageManager " .. "asset_db")
-                    if (not from_db and FileIO:Exists(file_path_ext)) then --(from_db and blt.asset_db.has_file(path, typ)) or
+                    if from_db and blt.asset_db.has_file(path, typ) or (not from_db and FileIO:Exists(file_path_ext)) then
                         BeardLib:DevLog("BeardLibPackageManager " .. "asset_db2")
                         local load = force
                         if not load then
