@@ -48,7 +48,6 @@
 			<class file="Constants.lua"/>
 			<class file="ModCore.lua"/>
 			<class file="ModuleBase.lua"/>
-			<class file="Deprecated.lua"/>
 			<class file="Frameworks.lua"/>
 
 			<classes directory="Utils">
@@ -117,7 +116,6 @@
 			<class file="Constants.lua"/>
 			<class file="ModCore.lua"/>
 			<class file="ModuleBase.lua"/>
-			<class file="Deprecated.lua"/>
 			<class file="Frameworks.lua"/>
 
 			<classes directory="Managers">

@@ -18,10 +18,6 @@ function BeardLibFileManager:init()
 
 	Hooks:Register(self.const.h_preprocessSF)
 	Hooks:Register(self.const.h_postprocessSF)
-
-	-- Deprecated, try not to use.
-	FileManager = self
-	BeardLib.managers.file = self
 end
 
 local env_ids = Idstring("environment")

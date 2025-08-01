@@ -13,9 +13,6 @@ function MenuDialogManager:init()
     self._dialogs = {}
     self._opened_dialogs = {}
     self._waiting_to_open = {}
-
-    -- Deprecated, try not to use.
-    BeardLib.managers.dialog = self
 end
 
 function MenuDialogManager:CreateDialogs()

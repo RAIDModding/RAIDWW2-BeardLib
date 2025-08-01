@@ -13,10 +13,6 @@ function BeardLibAchievementManager:init()
         [0] = {name = "Hidden Rank", color = "000000"} -- Don't define the rank 0 yourself, that's used by me.
     }
 
-    -- Deprecated, try not to use.
-    BeardLib.managers.custom_achievement = self
-    CustomAchievementManager = self
-
     Hooks:Add("SetupInitManagers", "PostInitTweakData_BeardLibAchievementManager", ClassClbk(self, "SetupAchievements"))
 end
 

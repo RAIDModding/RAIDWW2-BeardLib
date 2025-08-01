@@ -2,9 +2,6 @@ MenuUIManager = MenuUIManager or BeardLib:ManagerClass("MenuUI")
 
 function MenuUIManager:init()
     self._menus = {}
-
-    -- Deprecated, try not to use.
-    BeardLib.managers.menu_ui = self
 end
 
 function MenuUIManager:AddMenu(menu)

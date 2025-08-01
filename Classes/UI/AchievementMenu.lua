@@ -29,8 +29,6 @@ function BeardLibAchievementMenu:init()
 	})
 
 	self._initialized = false
-	-- Deprecated, try not to use.
-	BeardLib.managers.custom_achievement_menu = self
 end
 
 function BeardLibAchievementMenu:InitPanels(parent)

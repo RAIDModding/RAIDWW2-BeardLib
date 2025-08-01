@@ -61,7 +61,7 @@ function BeardLib:Init()
 	end
 
 	for name, config in pairs(self._config.load_modules) do
-		if BeardLib.modules[name] then
+		if BeardLib.Modules[name] then
 			local module = BeardLib.Modules[name]:new(self, config)
 			self[module._name] = module
 			table.insert(self._modules, module)

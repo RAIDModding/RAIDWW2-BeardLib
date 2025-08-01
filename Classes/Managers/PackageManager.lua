@@ -7,10 +7,6 @@ function BeardLibPackageManager:init()
     self.custom_packages = {}
     self.unload_on_restart = {}
     self.unload_on_restart_packages = {}
-
-     -- Deprecated, try not to use.
-    CustomPackageManager = self
-    BeardLib.managers.package = self
 end
 
 function BeardLibPackageManager:RegisterPackage(id, directory, config)
