@@ -111,7 +111,7 @@ function MenuDialogManager:CloseLastDialog()
         if dialog.on_escape then
             dialog:on_escape()
         elseif dialog:hide() then
-            managers.menu:post_event("prompt_exit")
+	        managers.menu_component:post_event("menu_exit")
         end
     end
     return true
