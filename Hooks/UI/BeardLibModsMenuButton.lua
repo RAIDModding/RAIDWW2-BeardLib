@@ -63,7 +63,7 @@ Hooks:PostHook(BLTNotificationsGui, "_layout", "BeardLibModsManagerSetup", funct
     })
     self._beardlib_updates_count:set_center(icon:center())
     self._beardlib_achievements = self._beardlib_panel:bitmap({
-        name = "CustomAchievments",
+        name = "CustomAchievements",
         texture = "guis/textures/achievement_trophy_white",
         layer = 55,
         w = 28,
@@ -100,8 +100,8 @@ function BLTNotificationsGui:mouse_moved(o, x, y)
     return mouse_move(self, x, y)
 end
 
-local mouse_press = BLTNotificationsGui.mouse_pressed
-function BLTNotificationsGui:mouse_pressed(o, button, x, y)
+local mouse_release = BLTNotificationsGui.mouse_released
+function BLTNotificationsGui:mouse_released(o, button, x, y)
     if not self._enabled or button ~= Idstring("0") then
         return
     end
@@ -113,5 +113,5 @@ function BLTNotificationsGui:mouse_pressed(o, button, x, y)
         BeardLib.Menus.Achievement:SetEnabled(true)
         return true
     end
-    return mouse_press(self, o, button, x, y)
+    return mouse_release(self, o, button, x, y)
 end
