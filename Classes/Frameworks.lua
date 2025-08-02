@@ -223,7 +223,7 @@ function FrameworkBase:InitMods()
 end
 
 function FrameworkBase:RegisterHooks()
-	self:AddCustomContact()
+	-- self:AddCustomContact()
 	self:SortMods()
     for _, mod in pairs(self._sorted_mods) do
         if not mod._disabled and mod._modules then
@@ -313,18 +313,18 @@ function FrameworkBase:RemoveMod(folder_name)
 	end
 end
 
-function FrameworkBase:AddCustomContact()
-	if not FrameworkBase._added_contact and ContactModule then -- FIXME
-		FrameworkBase._added_contact = true
-		ContactModule:new(BeardLib, {
-			id = "custom",
-			name_id = "heist_contact_custom",
-			description_id = "heist_contact_custom_description",
-			package = "packages/contact_bain",
-			assets_gui = "guis/mission_briefing/preload_contact_bain"
-		}):RegisterHook()
-	end
-end
+-- function FrameworkBase:AddCustomContact()
+-- 	if not FrameworkBase._added_contact and ContactModule then -- FIXME
+-- 		FrameworkBase._added_contact = true
+-- 		ContactModule:new(BeardLib, {
+-- 			id = "custom",
+-- 			name_id = "heist_contact_custom",
+-- 			description_id = "heist_contact_custom_description",
+-- 			package = "packages/contact_bain",
+-- 			assets_gui = "guis/mission_briefing/preload_contact_bain"
+-- 		}):RegisterHook()
+-- 	end
+-- end
 
 MapFramework = MapFramework or BeardLib:Class(FrameworkBase)
 MapFramework._ignore_folders = {backups = true, prefabs = true}

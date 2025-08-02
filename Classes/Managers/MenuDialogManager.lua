@@ -13,9 +13,6 @@ function MenuDialogManager:init()
     self._dialogs = {}
     self._opened_dialogs = {}
     self._waiting_to_open = {}
-
-    -- Deprecated, try not to use.
-    BeardLib.managers.dialog = self
 end
 
 function MenuDialogManager:CreateDialogs()
@@ -111,7 +108,7 @@ function MenuDialogManager:CloseLastDialog()
         if dialog.on_escape then
             dialog:on_escape()
         elseif dialog:hide() then
-            managers.menu:post_event("prompt_exit")
+	        managers.menu_component:post_event("menu_exit")
         end
     end
     return true

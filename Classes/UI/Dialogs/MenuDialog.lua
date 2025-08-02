@@ -193,7 +193,7 @@ end
 
 function MenuDialog:on_escape(yes)
     self:hide(yes)
-    managers.menu:post_event("prompt_exit")
+    managers.menu_component:post_event("menu_exit")
 end
 
 function QuickDialog(opt, items)

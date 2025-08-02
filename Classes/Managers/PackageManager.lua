@@ -7,10 +7,6 @@ function BeardLibPackageManager:init()
     self.custom_packages = {}
     self.unload_on_restart = {}
     self.unload_on_restart_packages = {}
-
-     -- Deprecated, try not to use.
-    CustomPackageManager = self
-    BeardLib.managers.package = self
 end
 
 function BeardLibPackageManager:RegisterPackage(id, directory, config)
@@ -233,7 +229,11 @@ function BeardLibPackageManager:LoadConfig(directory, config, mod, settings)
                     local dyn_load_menu = NotNil(child.load_in_menu, config.load_in_menu, false)
                     local dyn_load = NotNil(child.load, config.load, false)
                     BeardLib:DevLog("BeardLibPackageManager " .. "asset_db")
-                    if (not from_db and FileIO:Exists(file_path_ext)) then --(from_db and blt.asset_db.has_file(path, typ)) or
+                    local language
+                    if typ == "bnk" and from_db and not blt.asset_db.has_file(path, typ) then
+                        language = "english" -- has_file requires language for localized soundbanks.
+                    end
+                    if (from_db and blt.asset_db.has_file(path, typ, language and {language = language})) or (not from_db and FileIO:Exists(file_path_ext)) then
                         BeardLib:DevLog("BeardLibPackageManager " .. "asset_db2")
                         local load = force
                         if not load then

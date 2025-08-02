@@ -16,9 +16,6 @@ function BeardLibModsMenu:init(data)
         use_default_close_key = true
     })
     self._waiting_for_update = {}
-
-    -- Deprecated, try not to use.
-    BeardLib.managers.mods_menu = self
 end
 
 --DEV ONLY--

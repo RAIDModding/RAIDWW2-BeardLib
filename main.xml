@@ -9,7 +9,7 @@
 	image="guis/textures/beardlib_logo"
 	color="Color(0.8,0.8,0.8)"
 	auto_image_color="true"
-	version="5.0.2.3">
+	version="5.0.4.0">
 	<load_modules>
 		<AddFiles directory="Assets">
 			<unit path="core/units/cubemap_gizmo/cubemap_gizmo" force_if_not_loaded="true"/>
@@ -48,7 +48,6 @@
 			<class file="Constants.lua"/>
 			<class file="ModCore.lua"/>
 			<class file="ModuleBase.lua"/>
-			<class file="Deprecated.lua"/>
 			<class file="Frameworks.lua"/>
 
 			<classes directory="Utils">
@@ -117,7 +116,6 @@
 			<class file="Constants.lua"/>
 			<class file="ModCore.lua"/>
 			<class file="ModuleBase.lua"/>
-			<class file="Deprecated.lua"/>
 			<class file="Frameworks.lua"/>
 
 			<classes directory="Managers">

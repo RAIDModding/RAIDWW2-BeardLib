@@ -18,7 +18,6 @@ function ScrollablePanelModified:init(panel, name, data)
 	self._scroll_bar:hide()
 	self._scroll_bar:set_w(data.scroll_width)
 	self._scroll_bar:set_right(self:panel():w())
-	self._scroll_bar_box_class:hide()
 
 	self._scroll_rect = self._scroll_bar:rect({
 		name = "scroll_rect",
@@ -153,7 +152,6 @@ function ScrollablePanelModified:set_scroll_state()
 	--Weird bug, y and h are basically "nan" if I don't set them here.
 	self._scroll_rect:set_y(0)
 	self._scroll_rect:set_h(self._scroll_bar:h())
-	self._scroll_bar_box_class:hide()
 
 	if not show_scrollbar then
 		self._scroll_bar:set_alpha(0)
