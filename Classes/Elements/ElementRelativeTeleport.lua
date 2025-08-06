@@ -1,7 +1,7 @@
 core:import("CoreMissionScriptElement")
 ElementRelativeTeleport = ElementRelativeTeleport or class(CoreMissionScriptElement.MissionScriptElement)
 
--- AIGroupType Element
+-- ElementRelativeTeleport Element
 -- Creator: Cpone
 
 function ElementRelativeTeleport:client_on_executed(...)

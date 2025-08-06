@@ -4,7 +4,7 @@ local Sync = BeardLib.Utils.Sync
 local sync_game_settings_id = "BeardLib_sync_game_settings"
 
 function Sync:SyncGameSettings(peer_id)
-    if Network:is_server() and managers.job:current_job_id() and Global.game_settings.level_id and Global.game_settings.difficulty and (managers.job:current_level_data().custom or managers.job:current_job_data().custom) then
+    if Network:is_server() and managers.raid_job:current_job_id() and Global.game_settings.level_id and Global.game_settings.difficulty and (self:IsCurrentJobCustom()) then
         local data = self:GetJobString()
         if peer_id then
             LuaNetworking:SendToPeer(peer_id, sync_game_settings_id, data)
@@ -40,8 +40,11 @@ function Sync:DownloadMap(level_name, job_id, udata, done_callback)
 					map.done_map_download = function()
 						BeardLib.Frameworks.Base:Load()
 						BeardLib.Frameworks.Base:RegisterHooks()
-						managers.job:_check_add_heat_to_jobs()
-						managers.crimenet:find_online_games(Global.game_settings.search_friends_only)
+						-- FIXME?
+						log("FIXME: refresh online games")
+						blt.flush_log()
+						-- managers.job:_check_add_heat_to_jobs()
+						-- managers.crimenet:find_online_games(Global.game_settings.search_friends_only)
 						if done_callback then
 							done_callback(tweak_data.operations.missions[job_id] ~= nil)
 						end
@@ -72,7 +75,7 @@ end
 
 function Sync:GetJobString()
     local level_id = Global.game_settings.level_id
-    local job_id = managers.job:current_job_id()
+    local job_id = managers.raid_job:current_job_id()
     local level = tweak_data.levels[level_id]
     local level_name = managers.localization:to_upper_text(level and level.name_id or "")
     local mod = BeardLib.Utils:GetMapByJobId(job_id)
@@ -299,7 +302,7 @@ function Sync:CleanOutfitString(str, is_henchman)
 end
 
 function Sync:IsCurrentJobCustom()
-    return managers.job:has_active_job() and (managers.job:current_level_data() and managers.job:current_level_data().custom or managers.job:current_job_data().custom)
+    return managers.raid_job:has_active_job() and (tweak_data.levels[managers.raid_job:current_level_id()] and tweak_data.levels[managers.raid_job:current_level_id()].custom or managers.raid_job:current_job().custom)
 end
 
 function Sync:Send(peer, name, msg)
