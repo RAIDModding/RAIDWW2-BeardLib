@@ -4,7 +4,7 @@
     author="GREAT BIG BUSHY BEARD &amp; Luffy"
     contact="simon@modworkshop.net"
     priority="500"
-    version="5.0.4.0"
+    version="5.0.4.1"
     undisablable="true"
     is_library="true"
     color="0 0.44 1"
@@ -15,8 +15,25 @@
         <post hook_id="lib/entry" script_path="Classes/Utils/Menu.lua"/>
 
         <group script_path="Hooks/">
-            <post hook_id="lib/tweak_data/groupaitweakdata" :script_path="Maps/Hooks.lua"/>
-            <post hook_id="core/lib/utils/dev/editor/coreworlddefinition" :script_path="Maps/CoreWorldDefinition.lua"/>
+            <group :script_path="Maps/">
+                <group :script_path="Hooks.lua">
+                    <post hook_id="lib/managers/missionmanager"/>
+                    <post hook_id="lib/managers/killzonemanager"/>
+                    <post hook_id="core/lib/managers/viewport/environment/coreenvironmentmanager"/>
+                    <post hook_id="core/lib/managers/coresequencemanager"/>
+                    <post hook_id="lib/managers/mission/elementinteraction"/>
+                    <post hook_id="lib/managers/mission/elementvehiclespawner"/>
+                    <post hook_id="core/lib/managers/coresoundenvironmentmanager"/>
+                    <post hook_id="core/lib/managers/mission/coreelementinstance"/>
+                    <post hook_id="core/lib/managers/mission/coreelementshape"/>
+                    <post hook_id="core/lib/managers/mission/coreelementarea"/>
+                    <post hook_id="lib/units/beings/player/playerdamage"/>
+                    <post hook_id="core/lib/managers/coreworldinstancemanager"/>
+                    <post hook_id="lib/tweak_data/groupaitweakdata"/>
+                    <post hook_id="lib/managers/gameplaycentralmanager"/>
+                </group>
+                <post hook_id="core/lib/utils/dev/editor/coreworlddefinition" :script_path="CoreWorldDefinition.lua"/>
+            </group>
 
             <group :script_path="UI/">
                 <post hook_id="lib/managers/menu/menucomponentmanager" :script_path="BeardLibModsMenuButton.lua"/>
