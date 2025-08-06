@@ -9,7 +9,7 @@
 	image="guis/textures/beardlib_logo"
 	color="Color(0.8,0.8,0.8)"
 	auto_image_color="true"
-	version="5.0.4.0">
+	version="5.0.4.1">
 	<load_modules>
 		<AddFiles directory="Assets">
 			<unit path="core/units/cubemap_gizmo/cubemap_gizmo" force_if_not_loaded="true"/>
