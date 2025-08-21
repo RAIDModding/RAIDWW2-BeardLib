@@ -21,33 +21,33 @@ function ElementEnvironment:on_executed(instigator)
         return
     end
 
-    -- local color_gradings = {
-    --     "color_off",
-    --     "color_payday",
-    --     "color_heat",
-    --     "color_nice",
-    --     "color_sin",
-    --     "color_bhd",
-    --     "color_xgen",
-    --     "color_xxxgen",
-    --     "color_matrix"
-    -- }
+    local color_gradings = {
+        "color_off",
+        "color_payday",
+        "color_heat",
+        "color_nice",
+        "color_sin",
+        "color_bhd",
+        "color_xgen",
+        "color_xxxgen",
+        "color_matrix"
+    }
 
-    -- if self._values.color_grading and self._values.color_grading ~= "none" then
-    --     if self._values.random then
-    --         managers.environment_controller:set_default_color_grading(color_gradings[math.random(1, #color_gradings)])
-    --     else
-    --         managers.environment_controller:set_default_color_grading(self._values.color_grading)
-    --     end
-    -- end
+    if self._values.color_grading and self._values.color_grading ~= "none" then
+        if self._values.random then
+            managers.environment_controller:set_default_color_grading(color_gradings[math.random(1, #color_gradings)])
+        else
+            managers.environment_controller:set_default_color_grading(self._values.color_grading)
+        end
+    end
 
-    -- if self._values.chromatic_amount and self._values.chromatic_amount ~= -1 then
-    --     if self._values.random then
-    --         managers.environment_controller:set_base_chromatic_amount(math.random(self._values.min_amount or 0, self._values.max_amount or 200))
-    --     else
-    --         managers.environment_controller:set_base_chromatic_amount(self._values.chromatic_amount)
-    --     end
-    -- end
+    if self._values.chromatic_amount and self._values.chromatic_amount ~= -1 then
+        if self._values.random then
+            managers.environment_controller:set_base_chromatic_amount(math.random(self._values.min_amount or 0, self._values.max_amount or 200))
+        else
+            managers.environment_controller:set_base_chromatic_amount(self._values.chromatic_amount)
+        end
+    end
 
     if self._values.contrast and self._values.contrast ~= -1 then
         if self._values.random then
@@ -65,7 +65,7 @@ function ElementEnvironment:on_executed(instigator)
         end
     end
 
-    -- managers.environment_controller:refresh_render_settings()
+    managers.environment_controller:refresh_render_settings()
 
     ElementEnvironment.super.on_executed(self, instigator)
 end
