@@ -20,25 +20,43 @@ if F == "missionmanager" then
 ----------------------------------------------------------------
 elseif F == "killzonemanager" then
 	-- Adds "kill" to killzone so you can kill the player instantly
-	KillzoneManager.type_upd_funcs.kill = function (obj, t, dt, data)
-		if not data.killed then
-			data.timer = data.timer + dt
-			if data.next_fire < data.timer then
-				data.killed = true
-				obj:_kill_unit(data.unit)
+	Hooks:PostHook(KillzoneManager, "update", "BeardLib.KillzoneManagerUpdate", function(self, t, dt)
+		for _, data in pairs(self._units) do
+			if alive(data.unit) then
+				if (data.type == "kill") then
+					if not data.killed then
+						data.timer = data.timer + dt
+						if data.next_kill < data.timer then
+							data.killed = true
+							if data.unit.character_damage and data.unit:character_damage()._force_kill then
+								data.unit:character_damage():_force_kill() -- players
+							elseif data.unit.character_damage and data.unit:character_damage()._die then
+								data.unit:character_damage():_die() -- bots
+							-- elseif data.unit.character_damage and data.unit:character_damage().die then
+								-- data.unit:character_damage():die() -- enemies -- TODO: want?
+							end
+						end
+					end
+				end
 			end
 		end
-	end
+	end)
 
-	Hooks:PostHook(KillzoneManager, "_add_unit", "BeardLib.AddUnit", function(self, unit, zone_type, element_id)
+	--[[
+	disabled for now as instigator is a userdata value
+	Hooks:PreHook(ElementKillZone, "on_executed", "BeardLib_ElementKillZone_on_executed_tmpfix", function(self, instigator)
+		if instigator.character_damage then
+			instigator.character_damage = instigator.character_damage
+		end
+	end)
+	]]--
+
+	Hooks:PostHook(KillzoneManager, "_add_unit", "BeardLib.AddUnit", function(self, unit, zone_type)
 		if zone_type == "kill" then
-			local u_key = unit:key()
-			self._units[u_key] = self._units[u_key] or {}
-			self._units[u_key][zone_type] = self._units[u_key][zone_type] or {}
-			self._units[u_key][zone_type][element_id] = {
+			self._units[unit:key()] = {
 				type = zone_type,
 				timer = 0,
-				next_fire = 0.1,
+				next_kill = 0.1,
 				unit = unit
 			}
 		end
@@ -128,6 +146,9 @@ elseif F == "coresequencemanager" then
 		end
 	end
 elseif F == "elementinteraction" then
+	--[[
+	disabled for now as it softlocks the last orders raid
+
     --Checks if the interaction unit is loaded to avoid crashes
     --Checks if interaction tweak id exists
     core:import("CoreMissionScriptElement")
@@ -151,7 +172,10 @@ elseif F == "elementinteraction" then
         self._id = data.id
         self._editor_name = data.editor_name
         self._values = data.values
+		self._sync_id = mission_script:sync_id()
     end
+
+	]]--
 ----------------------------------------------------------------
 elseif F == "elementvehiclespawner" then
     --Same as interaction element but checks the selected vehicle
@@ -199,18 +223,9 @@ elseif F == "coreelementshape"  or F == "coreelementarea" then
         end
     end)
 ----------------------------------------------------------------
-elseif F == "playermovement" then
-	local trigger = PlayerMovement.trigger_teleport
-	function PlayerMovement:trigger_teleport(data, ...)
-		data.fade_in = data.fade_in or 0
-		data.sustain = data.sustain or 0
-		data.fade_out = data.fade_out or 0
-		return trigger(self, data, ...)
-	end
-----------------------------------------------------------------
 elseif F == "playerdamage" then
     Hooks:PostHook(PlayerDamage, "init", "BeardLibPlyDmgInit", function(self)
-        local level_tweak = tweak_data.levels[managers.job:current_level_id()]
+        local level_tweak = tweak_data.operations.missions[managers.raid_job:current_level_id()]
 
         if level_tweak and level_tweak.player_invulnerable then
             self:set_mission_damage_blockers("damage_fall_disabled", true)
@@ -250,25 +265,17 @@ elseif F == "groupaitweakdata" then
         end
         return _read_mission_preset(self, tweak_data, ...)
     end
-----------------------------------------------------------------
-elseif F == "elementfilter" then
-    --Overkill decided not to add a one down check alongside the difficulties, so here's one, because why not.
-
-    Hooks:PostHook(ElementFilter, "_check_difficulty", "BeardLibFilterOneDownCheck", function(self)
-        if self._values.one_down and Global.game_settings.one_down then
-            return true
-        end
-    end)
-----------------------------------------------------------------
-elseif F == "menumanager" then
-	local o_refresh = MenuManager.refresh_level_select
-	function MenuManager.refresh_level_select(...)
-		if Global.game_settings.level_id then
-			return o_refresh(...)
-		else
-			BeardLib:log("[Warning] Refresh level select was called while level id was nil!")
-		end
-	end
+-- ----------------------------------------------------------------
+-- FIXME: need replacement in raid, when actually showing custom jobs?
+-- elseif F == "menumanager" then
+-- 	local o_refresh = MenuManager.refresh_level_select
+-- 	function MenuManager.refresh_level_select(...)
+-- 		if Global.game_settings.level_id then
+-- 			return o_refresh(...)
+-- 		else
+-- 			BeardLib:log("[Warning] Refresh level select was called while level id was nil!")
+-- 		end
+-- 	end
 ----------------------------------------------------------------
 elseif F == "gameplaycentralmanager" then
 	function GamePlayCentralManager:add_move_unit(unit, from, to, speed, done_callback)
