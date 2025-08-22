@@ -144,7 +144,7 @@
 		<value_node value="ExecuteCode"/>
 		<value_node value="OverrideInstigator"/>
 		<value_node value="BLCustomAchievement"/>
-		<value_node value="AIGroupType"/>
+		<!-- <value_node value="AIGroupType"/> FIXME? -->
 		<value_node value="RelativeTeleport"/>
 		<value_node value="RelativeTeleportTarget"/>
 	</mission_elements>
