@@ -42,11 +42,14 @@ elseif F == "killzonemanager" then
 		end
 	end)
 
+	--[[
+	disabled for now as instigator is a userdata value
 	Hooks:PreHook(ElementKillZone, "on_executed", "BeardLib_ElementKillZone_on_executed_tmpfix", function(self, instigator)
 		if instigator.character_damage then
-			instigator.chracter_damage = instigator.character_damage
+			instigator.character_damage = instigator.character_damage
 		end
 	end)
+	]]--
 
 	Hooks:PostHook(KillzoneManager, "_add_unit", "BeardLib.AddUnit", function(self, unit, zone_type)
 		if zone_type == "kill" then
@@ -143,6 +146,9 @@ elseif F == "coresequencemanager" then
 		end
 	end
 elseif F == "elementinteraction" then
+	--[[
+	disabled for now as it softlocks the last orders raid
+
     --Checks if the interaction unit is loaded to avoid crashes
     --Checks if interaction tweak id exists
     core:import("CoreMissionScriptElement")
@@ -168,6 +174,8 @@ elseif F == "elementinteraction" then
         self._values = data.values
 		self._sync_id = mission_script:sync_id()
     end
+
+	]]--
 ----------------------------------------------------------------
 elseif F == "elementvehiclespawner" then
     --Same as interaction element but checks the selected vehicle
